@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api/v1';
+const API_BASE_URL = 'http://203.145.47.239:8080/api/v1';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,20 +10,6 @@ const api = axios.create({
   withCredentials: true, // Enable sending cookies for OAuth2 session
 });
 
-
-// api.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//       console.log(token);
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
 
 // Handle token expiration
 api.interceptors.response.use(
