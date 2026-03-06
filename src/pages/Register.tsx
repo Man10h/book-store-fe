@@ -96,7 +96,7 @@ const Register = () => {
   if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 animate-fade-in">
+        <div className="max-w-md w-full surface-elevated p-8 animate-fade-in">
           <div className="text-center mb-6">
             <div className="text-6xl mb-4">📧</div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Check Your Email</h2>
@@ -107,7 +107,7 @@ const Register = () => {
 
           <form onSubmit={handleVerify} className="space-y-4">
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="alert-error">
                 {error}
               </div>
             )}
@@ -125,7 +125,7 @@ const Register = () => {
                 onChange={(e) => setVerificationCode(e.target.value)}
                 placeholder="Enter verification code"
                 maxLength={10}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm text-center text-2xl tracking-widest"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-xl focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm text-center text-2xl tracking-widest"
               />
             </div>
 
@@ -133,7 +133,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={verifyMutation.isPending}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50"
+                className="btn-primary w-full"
               >
                 {verifyMutation.isPending ? 'Verifying...' : 'Verify Account'}
               </button>
@@ -167,7 +167,7 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
-        <div className="bg-white rounded-2xl shadow-xl px-8 py-10 space-y-8 animate-fade-in">
+        <div className="surface-elevated px-8 py-10 space-y-8 animate-fade-in">
           <div className="text-center space-y-2">
             <h2 className="text-3xl font-extrabold text-gray-900">
               Create your account
@@ -184,7 +184,7 @@ const Register = () => {
           </div>
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+              <div className="alert-error">
                 {error}
               </div>
             )}
@@ -200,7 +200,7 @@ const Register = () => {
                   required
                   value={formData.username}
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent sm:text-sm"
+                  className="input-control"
                   placeholder="Choose a username"
                 />
               </div>
@@ -215,7 +215,7 @@ const Register = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent sm:text-sm"
+                  className="input-control"
                   placeholder="you@example.com"
                 />
               </div>
@@ -230,7 +230,7 @@ const Register = () => {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent sm:text-sm"
+                  className="input-control"
                   placeholder="At least 6 characters"
                 />
               </div>
@@ -245,7 +245,7 @@ const Register = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent sm:text-sm"
+                  className="input-control"
                   placeholder="Re-enter your password"
                 />
               </div>
@@ -255,7 +255,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={registerMutation.isPending}
-                className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-60"
+                className="btn-primary w-full"
               >
                 {registerMutation.isPending ? 'Creating account...' : 'Create account'}
               </button>

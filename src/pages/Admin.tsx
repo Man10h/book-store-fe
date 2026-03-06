@@ -128,13 +128,18 @@ const Admin = () => {
   };
 
   return (
-        <ProtectedRoute requireAdmin>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Admin Panel</h1>
+    <ProtectedRoute requireAdmin>
+      <div className="page-shell bg-gray-50">
+        <div className="container-shell">
+          <div className="page-header">
+            <div>
+              <h1 className="page-header-title">Admin Panel</h1>
+              <p className="page-header-subtitle">Manage users and books in your bookstore.</p>
+            </div>
+          </div>
 
           {/* Tabs */}
-          <div className="bg-white rounded-lg shadow-md mb-6">
+          <div className="surface mb-6">
             <div className="border-b border-gray-200">
               <nav className="flex -mb-px">
                 <button
@@ -163,7 +168,7 @@ const Admin = () => {
 
           {/* Users Tab */}
           {activeTab === 'users' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="surface p-6">
               <div className="mb-4">
                 <input
                   type="text"
@@ -173,7 +178,7 @@ const Admin = () => {
                     setPage(0);
                   }}
                   placeholder="Search by username..."
-                  className="px-4 py-2 border border-gray-300 rounded-lg w-full max-w-md"
+                  className="input-control max-w-md"
                 />
               </div>
 
@@ -186,50 +191,50 @@ const Admin = () => {
               ) : (
                 <>
                   <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <table className="table-shell">
+                      <thead className="table-head">
                         <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             ID
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Username
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Email
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Role
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Actions
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody>
                         {usersData?.content.map((user) => (
                           <tr key={user.id}>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900">
                               {user.id}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900">
                               {user.username}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900">
                               {user.email}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            <td className="table-cell whitespace-nowrap text-sm">
                               <span
-                                className={`px-2 py-1 rounded-full text-xs ${
+                                className={`status-badge ${
                                   user.roleName === 'ADMIN'
-                                    ? 'bg-purple-100 text-purple-800'
-                                    : 'bg-blue-100 text-blue-800'
+                                    ? 'bg-purple-50 text-purple-700'
+                                    : 'bg-blue-50 text-blue-700'
                                 }`}
                               >
                                 {user.roleName}
                               </span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                            <td className="table-cell whitespace-nowrap text-sm font-medium space-x-2">
                               {user.roleName !== 'ADMIN' && (
                                 <button
                                   onClick={() => updateRoleMutation.mutate(user.id)}
@@ -259,21 +264,21 @@ const Admin = () => {
 
                   {/* Pagination */}
                   {usersData && usersData.totalPages > 1 && (
-                    <div className="mt-4 flex justify-center space-x-2">
+                    <div className="pagination-shell">
                       <button
                         onClick={() => setPage((p) => Math.max(0, p - 1))}
                         disabled={page === 0}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50"
+                        className="btn-secondary"
                       >
                         Previous
                       </button>
-                      <span className="px-4 py-2">
+                      <span className="px-4 py-2 text-sm text-gray-700">
                         Page {page + 1} of {usersData.totalPages}
                       </span>
                       <button
                         onClick={() => setPage((p) => Math.min(usersData.totalPages - 1, p + 1))}
                         disabled={page >= usersData.totalPages - 1}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50"
+                        className="btn-secondary"
                       >
                         Next
                       </button>
@@ -286,7 +291,7 @@ const Admin = () => {
 
           {/* Books Tab */}
           {activeTab === 'books' && (
-            <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
+            <div className="surface p-6 space-y-6">
               {/* Search & Filter */}
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex-1 flex gap-3">
@@ -298,7 +303,7 @@ const Admin = () => {
                       setBookPage(0);
                     }}
                     placeholder="Search by title or author..."
-                    className="px-4 py-2 border border-gray-300 rounded-lg w-full"
+                    className="input-control"
                   />
                   <select
                     value={bookTypeFilter}
@@ -306,7 +311,7 @@ const Admin = () => {
                       setBookTypeFilter(e.target.value);
                       setBookPage(0);
                     }}
-                    className="px-4 py-2 border border-gray-300 rounded-lg"
+                    className="select-control md:w-56"
                   >
                     <option value="">All Types</option>
                     <option value="Fiction">Fiction</option>
@@ -320,7 +325,7 @@ const Admin = () => {
                 <button
                   type="button"
                   onClick={() => setShowBookForm(true)}
-                  className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+                  className="btn-primary"
                 >
                   New Book
                 </button>
@@ -328,7 +333,7 @@ const Admin = () => {
 
               {/* Book Form */}
               {showBookForm && (
-                <form onSubmit={handleBookSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 border border-gray-200 rounded-lg p-4">
+                <form onSubmit={handleBookSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 border border-gray-200 rounded-2xl p-4 bg-gray-50">
                   <div className="space-y-3">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -339,7 +344,7 @@ const Admin = () => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                        className="input-control"
                       />
                     </div>
                     <div>
@@ -351,7 +356,7 @@ const Admin = () => {
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                        className="input-control"
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -363,7 +368,7 @@ const Admin = () => {
                           type="text"
                           value={type}
                           onChange={(e) => setType(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                          className="input-control"
                           placeholder="e.g. Fiction"
                         />
                       </div>
@@ -376,7 +381,7 @@ const Admin = () => {
                           min="0"
                           value={price}
                           onChange={(e) => setPrice(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                          className="input-control"
                         />
                       </div>
                     </div>
@@ -406,14 +411,14 @@ const Admin = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         rows={6}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-xl"
                       />
                     </div>
                     <div className="flex items-center gap-3 pt-2">
                       <button
                         type="submit"
                         disabled={addBookMutation.isPending || updateBookMutation.isPending}
-                        className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50"
+                        className="btn-primary disabled:opacity-50"
                       >
                         {editingBook
                           ? updateBookMutation.isPending
@@ -426,7 +431,7 @@ const Admin = () => {
                       <button
                         type="button"
                         onClick={resetBookForm}
-                        className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                        className="btn-secondary"
                       >
                         Cancel
                       </button>
@@ -439,51 +444,51 @@ const Admin = () => {
               {booksLoading ? (
                 <div className="animate-pulse space-y-4">
                   {[...Array(5)].map((_, i) => (
-                    <div key={i} className="h-16 bg-gray-200 rounded" />
+                    <div key={i} className="h-16 bg-gray-200 rounded-xl" />
                   ))}
                 </div>
               ) : booksData && booksData.content.length > 0 ? (
                 <>
                   <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <table className="table-shell">
+                      <thead className="table-head">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             ID
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Title
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Author
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Type
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Price
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="table-cell">
                             Actions
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody>
                         {booksData.content.map((book) => (
                           <tr key={book.id}>
-                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900">
                               {book.id}
                             </td>
-                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 max-w-xs">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900 max-w-xs">
                               <div className="line-clamp-2">{book.title}</div>
                             </td>
-                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900">
                               {book.author}
                             </td>
-                            <td className="px-4 py-3 whitespace-nowrap text-sm">
+                            <td className="table-cell whitespace-nowrap text-sm">
                               {book.type}
                             </td>
-                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            <td className="table-cell whitespace-nowrap text-sm text-gray-900">
                               {book.price
                                 ? new Intl.NumberFormat('vi-VN', {
                                   style: 'currency',
@@ -491,7 +496,7 @@ const Admin = () => {
                                 }).format(book.price)
                                 : 'N/A'}
                             </td>
-                            <td className="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+                            <td className="table-cell whitespace-nowrap text-sm font-medium space-x-2">
                               <button
                                 type="button"
                                 onClick={() => handleEditBook(book)}
@@ -520,16 +525,16 @@ const Admin = () => {
 
                   {/* Pagination */}
                   {booksData.totalPages > 1 && (
-                    <div className="mt-4 flex justify-center space-x-2">
+                    <div className="pagination-shell">
                       <button
                         type="button"
                         onClick={() => setBookPage((p) => Math.max(0, p - 1))}
                         disabled={bookPage === 0}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50"
+                        className="btn-secondary"
                       >
                         Previous
                       </button>
-                      <span className="px-4 py-2">
+                      <span className="px-4 py-2 text-sm text-gray-700">
                         Page {bookPage + 1} of {booksData.totalPages}
                       </span>
                       <button
@@ -538,7 +543,7 @@ const Admin = () => {
                           setBookPage((p) => Math.min(booksData.totalPages - 1, p + 1))
                         }
                         disabled={bookPage >= booksData.totalPages - 1}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50"
+                        className="btn-secondary"
                       >
                         Next
                       </button>

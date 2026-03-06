@@ -73,9 +73,10 @@ const ImageSlider = () => {
   const handleMouseLeave = () => setIsAutoplay(true);
 
   return (
-    <section className="relative w-full h-96 md:h-[500px] overflow-hidden bg-black">
+    <section className="container-shell mt-6">
+      <div className="relative h-[320px] w-full overflow-hidden rounded-3xl border border-amber-100 bg-black shadow-xl md:h-[460px]">
       {/* Slides */}
-      <div className="relative w-full h-full">
+      <div className="relative h-full w-full">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
@@ -89,15 +90,15 @@ const ImageSlider = () => {
               className="w-full h-full object-cover"
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/35 to-transparent" />
             
             {/* Text Content */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white">
-                <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+              <div className="max-w-3xl px-6 text-center text-white md:px-10">
+                <h2 className="mb-3 text-3xl font-extrabold tracking-tight drop-shadow-lg md:text-5xl">
                   {slide.title}
                 </h2>
-                <p className="text-lg md:text-2xl drop-shadow-lg">
+                <p className="text-base text-white/90 md:text-xl">
                   {slide.description}
                 </p>
               </div>
@@ -111,7 +112,7 @@ const ImageSlider = () => {
         onClick={prevSlide}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 text-white rounded-full p-3 transition-all duration-300"
+        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-3 text-white transition-all duration-300 hover:bg-black/50"
         aria-label="Previous slide"
       >
         <svg
@@ -133,7 +134,7 @@ const ImageSlider = () => {
         onClick={nextSlide}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 text-white rounded-full p-3 transition-all duration-300"
+        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-3 text-white transition-all duration-300 hover:bg-black/50"
         aria-label="Next slide"
       >
         <svg
@@ -152,7 +153,7 @@ const ImageSlider = () => {
       </button>
 
       {/* Dot Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -170,8 +171,9 @@ const ImageSlider = () => {
       </div>
 
       {/* Slide Counter */}
-      <div className="absolute top-6 right-6 z-10 text-white bg-black/40 px-4 py-2 rounded-lg text-sm font-semibold">
+      <div className="absolute right-6 top-6 z-10 rounded-lg bg-black/40 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
         {currentSlide + 1} / {slides.length}
+      </div>
       </div>
     </section>
   );

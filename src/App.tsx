@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -23,7 +24,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <BrowserRouter>
-          <div className="min-h-screen flex flex-col bg-gray-100">
+          <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">
               <Routes>
@@ -78,6 +79,7 @@ const App: React.FC = () => {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
+            <Footer />
           </div>
         </BrowserRouter>
 

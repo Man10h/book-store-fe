@@ -50,11 +50,9 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
-        <div className="bg-white rounded-2xl shadow-xl px-8 py-10 space-y-8 animate-fade-in">
+        <div className="surface-elevated px-8 py-10 space-y-8 animate-fade-in">
           <div className="text-center space-y-2">
-            <h2 className="text-3xl font-extrabold text-gray-900">
-              Welcome back
-            </h2>
+            <h2 className="text-3xl font-extrabold text-gray-900">Welcome back</h2>
             <p className="text-sm text-gray-600">
               Sign in to continue exploring your favorite books.
             </p>
@@ -68,12 +66,12 @@ const Login = () => {
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             {successMessage && (
-              <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md text-sm">
+              <div className="alert-success">
                 {successMessage}
               </div>
             )}
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+              <div className="alert-error">
                 {error}
               </div>
             )}
@@ -90,7 +88,7 @@ const Login = () => {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent sm:text-sm"
+                  className="input-control"
                   placeholder="Enter your username"
                 />
               </div>
@@ -105,7 +103,7 @@ const Login = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent sm:text-sm"
+                  className="input-control"
                   placeholder="Enter your password"
                 />
               </div>
@@ -123,7 +121,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={loginMutation.isPending}
-                className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-60"
+                className="btn-primary w-full"
               >
                 {loginMutation.isPending ? 'Signing in...' : 'Sign in'}
               </button>
@@ -143,7 +141,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="w-full inline-flex justify-center items-center gap-2 py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-600 hover:bg-gray-50"
+                  className="w-full inline-flex justify-center items-center gap-2 py-2.5 px-4 border border-gray-300 rounded-xl shadow-sm bg-white text-sm font-medium text-gray-600 hover:bg-gray-50"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path

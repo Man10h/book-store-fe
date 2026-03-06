@@ -152,18 +152,18 @@ const BookList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="page-shell bg-gray-50">
+      <div className="container-shell">
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className="surface mb-8">
           <form onSubmit={handleSearch} className="mb-4">
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 md:flex-row">
               <input
                 type="text"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 placeholder="Search by title or author..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="flex-1 input-control"
               />
               <select
                 value={type}
@@ -171,7 +171,7 @@ const BookList = () => {
                   setType(e.target.value);
                   setPage(0);
                 }}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="select-control md:w-48"
               >
                 <option value="">All Types</option>
                 <option value="Fiction">Fiction</option>
@@ -183,7 +183,7 @@ const BookList = () => {
               </select>
               <button
                 type="submit"
-                className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+                className="btn-primary md:px-6"
               >
                 Search
               </button>
@@ -191,7 +191,7 @@ const BookList = () => {
           </form>
 
           {data && (
-            <p className="text-gray-600">
+            <p className="text-sm text-gray-600">
               Found {data.totalElements} book{data.totalElements !== 1 ? 's' : ''}
             </p>
           )}
@@ -202,7 +202,7 @@ const BookList = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[...Array(12)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-[3/4] bg-gray-200 rounded-lg mb-4"></div>
+                <div className="aspect-[3/4] bg-gray-200 rounded-2xl mb-4"></div>
                 <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
                 <div className="h-4 bg-gray-200 rounded w-1/2"></div>
               </div>
@@ -218,21 +218,21 @@ const BookList = () => {
 
             {/* Pagination */}
             {data.totalPages > 1 && (
-              <div className="flex justify-center items-center space-x-2">
+              <div className="pagination-shell">
                 <button
                   onClick={() => setPage((p) => Math.max(0, p - 1))}
                   disabled={page === 0}
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  className="btn-secondary disabled:cursor-not-allowed"
                 >
                   Previous
                 </button>
-                <span className="px-4 py-2 text-gray-700">
+                <span className="px-4 py-2 text-sm text-gray-700">
                   Page {page + 1} of {data.totalPages}
                 </span>
                 <button
                   onClick={() => setPage((p) => Math.min(data.totalPages - 1, p + 1))}
                   disabled={page >= data.totalPages - 1}
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  className="btn-secondary disabled:cursor-not-allowed"
                 >
                   Next
                 </button>
@@ -240,7 +240,7 @@ const BookList = () => {
             )}
           </>
         ) : (
-          <div className="text-center py-12">
+          <div className="text-center py-12 surface animate-fade-in">
             <div className="text-6xl mb-4">📚</div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No books found</h3>
             <p className="text-gray-600">Try adjusting your search criteria</p>

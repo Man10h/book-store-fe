@@ -5,18 +5,24 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
-          <h1 className="text-xl font-semibold text-gray-900 mb-2">Profile</h1>
-          <p className="text-gray-600 text-sm">You need to sign in to view your profile.</p>
+      <div className="page-shell bg-gray-50">
+        <div className="container-shell">
+          <div className="max-w-3xl mx-auto">
+            <div className="surface p-8 text-center animate-fade-in">
+              <h1 className="app-title mb-2">Profile</h1>
+              <p className="app-subtitle text-sm">You need to sign in to view your profile.</p>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 space-y-8">
+    <div className="page-shell bg-gray-50">
+      <div className="container-shell">
+        <div className="max-w-3xl mx-auto">
+          <div className="surface p-8 space-y-8 animate-fade-in">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
@@ -61,6 +67,8 @@ const Profile = () => {
           <p className="text-xs text-gray-500">
             This information is loaded from your account using your current sign-in token.
           </p>
+        </div>
+          </div>
         </div>
       </div>
     </div>

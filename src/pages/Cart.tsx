@@ -47,15 +47,18 @@ const Cart = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Please login to view your cart</h2>
-          <button
-            onClick={() => navigate('/login')}
-            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
-          >
-            Login
-          </button>
+      <div className="page-shell bg-gray-50">
+        <div className="container-shell">
+          <div className="max-w-xl mx-auto text-center surface p-8">
+            <h2 className="app-title mb-3">Please login to view your cart</h2>
+            <p className="app-subtitle mb-6">Sign in to see the books you have added.</p>
+            <button
+              onClick={() => navigate('/login')}
+              className="btn-primary"
+            >
+              Login
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -63,11 +66,11 @@ const Cart = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="page-shell bg-gray-50">
+        <div className="container-shell">
           <div className="animate-pulse space-y-4">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg shadow p-6 h-32"></div>
+              <div key={i} className="surface h-32"></div>
             ))}
           </div>
         </div>
@@ -81,18 +84,23 @@ const Cart = () => {
   }, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+    <div className="page-shell bg-gray-50">
+      <div className="container-shell">
+        <div className="page-header">
+          <div>
+            <h1 className="page-header-title">Shopping Cart</h1>
+            <p className="page-header-subtitle">Review the books in your cart before checkout.</p>
+          </div>
+        </div>
 
         {items.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="surface p-12 text-center animate-fade-in">
             <div className="text-6xl mb-4">🛒</div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
             <p className="text-gray-600 mb-6">Start adding some books to your cart!</p>
             <Link
               to="/books"
-              className="inline-block px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+              className="btn-primary"
             >
               Browse Books
             </Link>
@@ -102,7 +110,7 @@ const Cart = () => {
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
-                <div key={item.id} className="bg-white rounded-lg shadow-md p-6">
+                <div key={item.id} className="surface p-6">
                   <div className="flex gap-4">
                     {/* Book Image */}
                     <Link to={`/books/${item.bookResponse.id}`} className="flex-shrink-0">
@@ -136,12 +144,12 @@ const Cart = () => {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => {
-                              if (item.quantity > 1) {
+                          if (item.quantity > 1) {
                                 updateItemMutation.mutate({ itemId: item.id, quantity: item.quantity - 1 });
                               }
                             }}
                             disabled={item.quantity <= 1 || updateItemMutation.isPending}
-                            className="p-1 border border-gray-300 rounded disabled:opacity-50"
+                            className="p-1 border border-gray-300 rounded disabled:opacity-50 bg-white hover:bg-gray-50"
                           >
                             <MinusIcon className="h-4 w-4" />
                           </button>
@@ -153,7 +161,7 @@ const Cart = () => {
                               updateItemMutation.mutate({ itemId: item.id, quantity: item.quantity + 1 });
                             }}
                             disabled={updateItemMutation.isPending}
-                            className="p-1 border border-gray-300 rounded disabled:opacity-50"
+                            className="p-1 border border-gray-300 rounded disabled:opacity-50 bg-white hover:bg-gray-50"
                           >
                             <PlusIcon className="h-4 w-4" />
                           </button>
@@ -175,7 +183,7 @@ const Cart = () => {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+              <div className="surface p-6 sticky top-4">
                 <h2 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h2>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-gray-600">
@@ -193,7 +201,7 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
-                <button className="w-full px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-semibold">
+                <button className="w-full btn-primary font-semibold">
                   Proceed to Checkout
                 </button>
                 {total < 500000 && (
