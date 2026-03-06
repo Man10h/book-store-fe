@@ -51,9 +51,7 @@ const Header = () => {
             <Link to="/books" className="btn-ghost">
               Books
             </Link>
-            <Link to="/membership" className="btn-ghost">
-              Membership
-            </Link>
+            
           </nav>
 
           <div className="flex items-center gap-2 md:gap-3">
