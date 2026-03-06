@@ -4,6 +4,9 @@ import { useMutation } from '@tanstack/react-query';
 import { authService } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
 
+const API_OAUTH2_URL =
+  import.meta.env.VITE_API_OAUTH2_URL;
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +47,7 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     // Redirect to backend OAuth2 endpoint
-    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+    window.location.href = API_OAUTH2_URL;
   };
 
   return (
